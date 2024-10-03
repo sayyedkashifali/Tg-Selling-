@@ -1,1 +1,1 @@
-worker: python bot.py
+python3.8 bot.py
