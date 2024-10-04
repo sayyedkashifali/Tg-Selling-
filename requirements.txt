@@ -1,3 +1,6 @@
+pyrogram
+Flask
+TgCrypto 
 pyTelegramBotAPI 
 Pyrogram
 motor
