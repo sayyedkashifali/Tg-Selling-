@@ -7,8 +7,8 @@ import os
 app = Flask(__name__)
 
 # Pyrogram Bot configuration
-api_id = os.environ.get("27317700")  # Get API ID from environment variable
-api_hash = os.environ.get("de1077f45e29e6abebcd2b9dd196be1d")  # Get API hash from environment variable
+api_id = os.environ.get("API_ID")  # Get API ID from environment variable
+api_hash = os.environ.get("API_HASH")  # Get API hash from environment variable
 bot_token = os.environ.get("BOT_TOKEN")  # Get bot token from environment variable
 
 # Pyrogram Client
@@ -22,6 +22,7 @@ bot = Client(
 # Telegram Bot Command Handler for /start
 @bot.on_message(filters.command("start"))
 def start_command(client, message):
+    print("Received /start command")
     message.reply_text("Hello! This bot is active and running!")
 
 # Flask route for health check
