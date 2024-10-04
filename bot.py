@@ -41,7 +41,7 @@ def handle_callback_query(client, callback_query):
     if callback_query.data == "free_shop":
         callback_query.message.reply_text("Welcome to the Free Shop!")
     elif callback_query.data == "paid_shop":
-        callback_query.message.reply_text("Welcome to the Paid Shop! Please proceed with payment.")
+        callback_query.message.reply_text("Welcome to the Paid Shop!")
 
 # Flask route for health check
 @app.route("/")
