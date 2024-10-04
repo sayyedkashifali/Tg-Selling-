@@ -1,4 +1,5 @@
 from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from flask import Flask
 import threading
 import os
@@ -28,7 +29,19 @@ bot = Client(
 @bot.on_message(filters.command("start"))
 def start_command(client, message):
     logging.info("Received /start command")
-    message.reply_text("Hello! This bot is active and running!")
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("Free Shop", callback_data="free_shop")],
+        [InlineKeyboardButton("Paid Shop", callback_data="paid_shop")]
+    ])
+    message.reply_text("Welcome to the Shop Bot! Choose an option:", reply_markup=keyboard)
+
+# Callback query handler
+@bot.on_callback_query()
+def handle_callback_query(client, callback_query):
+    if callback_query.data == "free_shop":
+        callback_query.message.reply_text("Welcome to the Free Shop!")
+    elif callback_query.data == "paid_shop":
+        callback_query.message.reply_text("Welcome to the Paid Shop! Please proceed with payment.")
 
 # Flask route for health check
 @app.route("/")
