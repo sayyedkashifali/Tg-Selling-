@@ -1,5 +1,9 @@
 pyrogram
 Flask
+TgCrypto
+gunicorn
+pyrogram
+Flask
 TgCrypto 
 pyTelegramBotAPI 
 Pyrogram
