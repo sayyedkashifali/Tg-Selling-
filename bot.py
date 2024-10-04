@@ -36,9 +36,9 @@ def run_bot():
         print(f"Pyrogram Error: {e}")
 
 if __name__ == "__main__":
-    # Running Flask app in main thread
-    app.run(host="0.0.0.0", port=8080)
-
     # Running Telegram bot in a separate thread
     t2 = threading.Thread(target=run_bot)
     t2.start()
+    
+    # Running Flask app in main thread
+    app.run(host="0.0.0.0", port=8080)
