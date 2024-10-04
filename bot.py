@@ -15,7 +15,8 @@ def send_welcome(message):
 # Start listening for messages with error handling and retry mechanism
 while True:
     try:
-        bot.polling(none_stop=True, timeout=60)  # Increased timeout
+        # Run the bot on port 8080
+        bot.polling(none_stop=True, timeout=60, host="0.0.0.0", port=8080)  
     except Exception as e:
         print(f"Error: {e}")
         time.sleep(15)  # Wait before retrying
