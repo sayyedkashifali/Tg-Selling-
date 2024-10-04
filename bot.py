@@ -9,7 +9,7 @@ bot = telebot.TeleBot(BOT_TOKEN)
 # Handle the /start command
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "Bot Is Working 💀)
+    bot.reply_to(message, "Bot Is Working 💀")
 
 # Start listening for messages
 bot.polling()
