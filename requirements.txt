@@ -1,4 +1,5 @@
-tgcrypto
+pyTelegramBotAPI 
+python bot.pytgcrypto
 motor
 marshmallow
 umongo
