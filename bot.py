@@ -1,22 +1,43 @@
+from pyrogram import Client, filters
+from flask import Flask
+import threading
 import os
-import time
-import telebot
 
-# Access the bot token from environment variables
-BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+# Flask app
+app = Flask(__name__)
 
-bot = telebot.TeleBot(BOT_TOKEN)
+# Pyrogram Bot configuration
+api_id = os.environ.get("27317700")
+api_hash = os.environ.get("de1077f45e29e6abebcd2b9dd196be1d")
+bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
 
-# Handle the /start command
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
-    bot.reply_to(message, "Welcome to the bot! Products will be added soon.")
+# Pyrogram Client
+bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
-# Start listening for messages with error handling and retry mechanism
-while True:
-    try:
-        # Removed host and port arguments for Koyeb deployment
-        bot.polling(none_stop=True, timeout=60)  
-    except Exception as e:
-        print(f"Error: {e}")
-        time.sleep(15)  # Wait before retrying
+
+# Telegram Bot Command Handler for /start
+@bot.on_message(filters.command("start"))
+def start_command(client, message):
+    message.reply_text(
+        "Hello! This bot is powered by Flask and Pyrogram. How can I help you today?"
+    )
+
+
+# Flask route for health check or any simple route
+@app.route("/")
+def index():
+    return "Bot is running on Flask!"
+
+
+def run_bot():
+    bot.run()
+
+
+if __name__ == "__main__":
+    # Running Flask app in main thread
+    app.run(host="0.0.0.0", port=8080)
+
+    # Running Telegram bot in a separate thread
+    t2 = threading.Thread(target=run_bot)
+    t2.start()
+    
