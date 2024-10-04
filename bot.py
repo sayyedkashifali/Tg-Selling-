@@ -2,6 +2,11 @@ from pyrogram import Client, filters
 from flask import Flask
 import threading
 import os
+import logging
+import asyncio
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
 
 # Flask app
 app = Flask(__name__)
@@ -22,7 +27,7 @@ bot = Client(
 # Telegram Bot Command Handler for /start
 @bot.on_message(filters.command("start"))
 def start_command(client, message):
-    print("Received /start command")
+    logging.info("Received /start command")
     message.reply_text("Hello! This bot is active and running!")
 
 # Flask route for health check
@@ -32,9 +37,11 @@ def index():
 
 def run_bot():
     try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
         bot.run()
     except Exception as e:
-        print(f"Pyrogram Error: {e}")
+        logging.error(f"Pyrogram Error: {e}")
 
 if __name__ == "__main__":
     # Running Telegram bot in a separate thread
