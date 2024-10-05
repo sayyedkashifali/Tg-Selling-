@@ -78,4 +78,4 @@ if __name__ == "__main__":
     asyncio.run(send_startup_message())
     
     # Running Flask app in main thread
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0
