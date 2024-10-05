@@ -5,6 +5,7 @@ import threading
 import os
 import logging
 import asyncio
+import sqlite3
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -17,6 +18,10 @@ api_id = os.environ.get("API_ID")  # Get API ID from environment variable
 api_hash = os.environ.get("API_HASH")  # Get API hash from environment variable
 bot_token = os.environ.get("BOT_TOKEN")  # Get bot token from environment variable
 admin_chat_id = os.environ.get("ADMIN_CHAT_ID")  # Get admin chat ID from environment variable
+
+if not all([api_id, api_hash, bot_token, admin_chat_id]):
+    logging.error("One or more environment variables are not set.")
+    raise ValueError("Missing environment variables")
 
 # Pyrogram Client
 bot = Client(
@@ -46,8 +51,10 @@ def handle_callback_query(client, callback_query):
 
 # Send a message to the admin when the bot starts
 async def send_startup_message():
+    await bot.storage.open()
     async with bot:
         await bot.send_message(admin_chat_id, "Bot has been successfully deployed on Koyeb and is now running!")
+    await bot.storage.close()
 
 # Flask route for health check
 @app.route("/")
