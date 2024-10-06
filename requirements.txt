@@ -1,4 +1,3 @@
-npm install node-telegram-bot-api
 pyrogram==2.3.43
 Flask
 TgCrypto
