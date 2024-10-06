@@ -1,8 +1,8 @@
-pyrogram==2.3.43
+pyrogram
 Flask
 TgCrypto
 gunicorn
-pyrogram==2.3.43
+pyrofork
 Flask
 TgCrypto 
 pyTelegramBotAPI 
