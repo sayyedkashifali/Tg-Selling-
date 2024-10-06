@@ -1,8 +1,9 @@
+npm install node-telegram-bot-api
 pyrogram
 Flask
 TgCrypto
 gunicorn
-pyrofork
+pyrogram
 Flask
 TgCrypto 
 pyTelegramBotAPI 
